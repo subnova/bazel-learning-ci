@@ -28,12 +28,12 @@ jobs:
       # Uses a cache of bazel-out if available
       - uses: actions/cache@v2
         with:
-          path: bazel-out
-          key: ${{ runner.os }}
+          path: "~/.cache/bazel"
+          key: bazel
 
       # Runs a single command using the runners shell
       - name: Install Bazelisk
-        run: go get github.com/bazelbuild/bazelisk
+        uses: bazelbuild/setup=bazelisk@v1
 
       # Runs a set of commands using the runners shell
       - name: Bazel Test
