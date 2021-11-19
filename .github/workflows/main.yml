@@ -25,6 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # Uses a cache of bazel-out if available
+      - uses: actions/cache@v2
+        with:
+          path: bazel-out
+          key: ${{ runner.os }}
+
       # Runs a single command using the runners shell
       - name: Install Bazelisk
         run: go get github.com/bazelbuild/bazelisk
@@ -32,3 +38,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Bazel Test
         run: bazel test //...
+
