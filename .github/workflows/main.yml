@@ -37,5 +37,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Bazel Test
-        run: bazel test //...
+        with:
+          BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
+        run: bazel test --config=ci --remote-header=x-buildbuddy-api-key=${BUILDBUDDY_API_KEY} //...
 
